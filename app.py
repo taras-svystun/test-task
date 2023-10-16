@@ -25,7 +25,7 @@ if uploaded_file is not None and openai_api_key != '':
     index = VectorstoreIndexCreator().from_loaders([loader])
 
     with st.form('form'):
-        query = st.text_area('Enter your query:', 'What is the Wizzard name?')
+        query = st.text_area('Enter your query:', 'What is the Wizard name?')
         submitted = st.form_submit_button('Submit')
         if submitted:
             st.write(index.query(query))
