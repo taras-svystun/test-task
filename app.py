@@ -83,10 +83,9 @@ def generate_response(prompt_input):
     query = f"{string_dialogue} {prompt_input} Assistant: "
     try:
         output = qa.run(query)
-        return output
     except NameError:
-        st.write("You must load the text document first")
-    return ""
+        output = "You must load the text document first"
+    return output
     
 
 # User-provided prompt
