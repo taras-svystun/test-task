@@ -7,7 +7,7 @@ tiktoken
 torch
 transformers
 sentence-transformers
-faiss-gpu
+faiss-cpu
 
 # accelerate
 # einops
