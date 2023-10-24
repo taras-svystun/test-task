@@ -9,7 +9,7 @@ st.set_page_config(page_title="🦙💬 Llama 2 Chatbot")
 
 # Replicate Credentials
 with st.sidebar:
-    st.title('🦙💬 Llama 2 Chatbot')
+    st.title('💬 Chatbot for text document QA')
     if 'REPLICATE_API_TOKEN' in st.secrets:
         st.success('API key already provided!', icon='✅')
         replicate_api = st.secrets['REPLICATE_API_TOKEN']
@@ -21,8 +21,6 @@ with st.sidebar:
             st.success('Proceed to entering your prompt message!', icon='👉')
 
 os.environ['REPLICATE_API_TOKEN'] = replicate_api
-
-st.title('Demo for <client> 😇️️️️️️')
 
 uploaded_file = st.file_uploader("Add a text file")
 if uploaded_file is not None:
@@ -42,7 +40,7 @@ if uploaded_file is not None:
 
 # Store LLM generated responses
 if "messages" not in st.session_state.keys():
-    st.session_state.messages = [{"role": "assistant", "content": "How may I assist you today?"}]
+    st.session_state.messages = [{"role": "assistant", "content": "How can I help you?"}]
 
 # Display or clear chat messages
 for message in st.session_state.messages:
@@ -50,7 +48,7 @@ for message in st.session_state.messages:
         st.write(message["content"])
 
 def clear_chat_history():
-    st.session_state.messages = [{"role": "assistant", "content": "How may I assist you today?"}]
+    st.session_state.messages = [{"role": "assistant", "content": "How can I help you?"}]
 st.sidebar.button('Clear Chat History', on_click=clear_chat_history)
 
 # Function for generating LLaMA2 response
