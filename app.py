@@ -42,9 +42,8 @@ if uploaded_file is not None:
 
     model = AutoModelForCausalLM.from_pretrained("meta-llama/Llama-2-7b-chat-hf",
                                                 device_map='auto',
-                                                torch_dtype=torch.float16,
+                                                torch_dtype=torch.float32,
                                                 token=hf_token,
-                                                torch_dtype=torch.float32
                                                 #  load_in_8bit=True,
                                                 #  low_cpu_mem_usage=True
                                                 )
