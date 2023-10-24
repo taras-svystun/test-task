@@ -3,3 +3,4 @@ replicate
 langchain
 openllm
 openai
+tiktoken
