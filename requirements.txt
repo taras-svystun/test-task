@@ -1,15 +1,2 @@
 streamlit
-openai
-langchain
-chromadb
-pysqlite3-binary
-tiktoken
-torch
-transformers
-sentence-transformers
-faiss-cpu
-accelerate
-
-# einops
-# xformers
-# bitsandbytes
+replicate
