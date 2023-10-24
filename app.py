@@ -79,9 +79,9 @@ def generate_response(prompt_input):
 
     query = f"{string_dialogue} {prompt_input} Assistant: "
     output = qa.run(query)
-    # output = replicate.run('a16z-infra/llama13b-v2-chat:df7690f1994d94e96ad9d568eac121aecf50684a0b0963b25a41cc40061269e5', 
-    #                        input={"prompt": f"{string_dialogue} {prompt_input} Assistant: ",
-    #                               "temperature":0.1, "top_p":0.9, "max_length":512, "repetition_penalty":1})
+    output = replicate.run('a16z-infra/llama13b-v2-chat:df7690f1994d94e96ad9d568eac121aecf50684a0b0963b25a41cc40061269e5', 
+                           input={"prompt": f"{string_dialogue} {prompt_input} Assistant: ",
+                                  "temperature":0.1, "top_p":0.9, "max_length":512, "repetition_penalty":1})
     return output
 
 # User-provided prompt
@@ -96,10 +96,11 @@ if st.session_state.messages[-1]["role"] != "assistant":
         with st.spinner("Thinking..."):
             response = generate_response(prompt)
             placeholder = st.empty()
-            # full_response = ''
-            # for item in response:
-            #     full_response += item
-            #     placeholder.markdown(full_response)
+            full_response = ''
+            for item in response:
+                st.title(item)
+                full_response += item
+                placeholder.markdown(full_response)
             placeholder.markdown(response)
     message = {"role": "assistant", "content": response}
     st.session_state.messages.append(message)
