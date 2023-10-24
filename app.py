@@ -24,7 +24,7 @@ tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-2-7b-chat-hf",
 
 model = AutoModelForCausalLM.from_pretrained("meta-llama/Llama-2-7b-chat-hf",
                                             device_map='auto',
-                                            torch_dtype=torch.float32,
+                                            torch_dtype=torch.bfloat16,
                                             token=hf_token,
                                             #  load_in_8bit=True,
                                             #  low_cpu_mem_usage=True
