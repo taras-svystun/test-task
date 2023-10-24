@@ -2,3 +2,4 @@ streamlit
 replicate
 langchain
 openllm
+openai
