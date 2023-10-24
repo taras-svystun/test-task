@@ -19,7 +19,7 @@ embeddings = HuggingFaceEmbeddings(model_name='sentence-transformers/all-MiniLM-
 
 tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-2-7b-chat-hf",
                                         token=hf_token,
-                                          low_cpu_mem_usage=True
+                                        low_cpu_mem_usage=True
                                         )
 
 model = AutoModelForCausalLM.from_pretrained("meta-llama/Llama-2-7b-chat-hf",
