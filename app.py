@@ -81,7 +81,10 @@ def generate_response(prompt_input):
             string_dialogue += "Assistant: " + dict_message["content"] + "\n\n"
 
     query = f"{string_dialogue} {prompt_input} Assistant: "
-    output = qa.run(query)
+    try:
+        output = qa.run(query)
+    except NameError:
+        st.write("You must load the text document first")
     return output
 
 # User-provided prompt
