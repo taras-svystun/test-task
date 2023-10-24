@@ -15,36 +15,6 @@ from langchain.text_splitter import CharacterTextSplitter
 from transformers import pipeline, AutoTokenizer, AutoModelForCausalLM
 
 hf_token = os.environ['HuggingFaceHub_API_Token']
-embeddings = HuggingFaceEmbeddings(model_name='sentence-transformers/all-MiniLM-L6-v2')
-
-tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-2-7b-chat-hf",
-                                        token=hf_token,
-                                        low_cpu_mem_usage=True
-                                        )
-
-model = AutoModelForCausalLM.from_pretrained("meta-llama/Llama-2-7b-chat-hf",
-                                            device_map='auto',
-                                            torch_dtype=torch.float32,
-                                            token=hf_token,
-                                            #  load_in_8bit=True,
-                                            low_cpu_mem_usage=True
-                                            )
-
-pipe = pipeline("text-generation",
-                model=model,
-                tokenizer= tokenizer,
-                torch_dtype=torch.float32,
-                device_map="auto",
-                max_new_tokens = 1024,
-                do_sample=True,
-                top_k=10,
-                num_return_sequences=1,
-                eos_token_id=tokenizer.eos_token_id
-                )
-
-llm=HuggingFacePipeline(pipeline=pipe, model_kwargs={'temperature':0})
-
-
 
 st.title('Demo for <client> 😇️️️️️️')
 
@@ -62,7 +32,36 @@ if uploaded_file is not None:
                                         chunk_size=1000,
                                         chunk_overlap=50)
     text_chunks=text_splitter.split_documents(documents)
+    embeddings = HuggingFaceEmbeddings(model_name='sentence-transformers/all-MiniLM-L6-v2')
     vectorstore=FAISS.from_documents(text_chunks, embeddings)
+
+    tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-2-7b-chat-hf",
+                                            token=hf_token,
+                                            # low_cpu_mem_usage=True
+                                            )
+
+    model = AutoModelForCausalLM.from_pretrained("meta-llama/Llama-2-7b-chat-hf",
+                                                device_map='auto',
+                                                torch_dtype=torch.float32,
+                                                token=hf_token,
+                                                #  load_in_8bit=True,
+                                                # low_cpu_mem_usage=True
+                                                )
+
+    pipe = pipeline("text-generation",
+                    model=model,
+                    tokenizer= tokenizer,
+                    torch_dtype=torch.bfloat16,
+                    device_map="auto",
+                    max_new_tokens = 1024,
+                    do_sample=True,
+                    top_k=10,
+                    num_return_sequences=1,
+                    eos_token_id=tokenizer.eos_token_id
+                    )
+
+    llm=HuggingFacePipeline(pipeline=pipe, model_kwargs={'temperature':0})
+    
 
     chain =  RetrievalQA.from_chain_type(llm=llm,
                                         chain_type="stuff",
