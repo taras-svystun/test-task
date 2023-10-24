@@ -72,7 +72,7 @@ st.sidebar.button('Clear Chat History', on_click=clear_chat_history)
 def generate_response(prompt_input):
     string_dialogue = """
     You are a helpful assistant. You do not respond as 'User' or pretend to be 'User'. You only respond once as 'Assistant'.
-    Answer all the questions in short and clearly.
+    Answer all the questions in short and clearly. Below you'll find the conversation between you and the user.
     """
     for dict_message in st.session_state.messages:
         if dict_message["role"] == "user":
