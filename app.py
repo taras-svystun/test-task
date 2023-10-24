@@ -44,6 +44,7 @@ if uploaded_file is not None:
                                                 device_map='auto',
                                                 torch_dtype=torch.float16,
                                                 token=hf_token,
+                                                torch_dtype=torch.float32
                                                 #  load_in_8bit=True,
                                                 #  low_cpu_mem_usage=True
                                                 )
