@@ -83,10 +83,11 @@ def generate_response(prompt_input):
     query = f"{string_dialogue} {prompt_input} Assistant: "
     try:
         output = qa.run(query)
+        return output
     except NameError:
         st.write("You must load the text document first")
-        output = ""
-    return output
+    return ""
+    
 
 # User-provided prompt
 if prompt := st.chat_input(disabled=not replicate_api):
