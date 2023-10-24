@@ -4,3 +4,4 @@ langchain
 openllm
 openai
 tiktoken
+faiss-cpu
