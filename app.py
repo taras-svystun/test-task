@@ -47,7 +47,7 @@ if uploaded_file is not None:
     embeddings = OpenAIEmbeddings()
     vectorstore=FAISS.from_documents(text_chunks, embeddings)
 
-    server_url = "https://48d8-38-147-83-24.ngrok-free.app/"
+    server_url = "https://683c-38-147-83-24.ngrok-free.app"
     llm = OpenLLM(server_url=server_url)
 
     qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=vectorstore.as_retriever())
