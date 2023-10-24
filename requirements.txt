@@ -7,3 +7,9 @@ tiktoken
 torch
 transformers
 sentence-transformers
+faiss-gpu
+
+# accelerate
+# einops
+# xformers
+# bitsandbytes

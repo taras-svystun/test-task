@@ -63,9 +63,10 @@ if uploaded_file is not None:
     llm=HuggingFacePipeline(pipeline=pipe, model_kwargs={'temperature':0})
     chain =  RetrievalQA.from_chain_type(llm=llm,
                                          chain_type="stuff",
-                                         return_source_documents=False,
+                                         return_source_documents=True,
                                          retriever=vectorstore.as_retriever()
                                          )
+    # Try Conversational Retrieval
 
 
     with st.form('form'):
