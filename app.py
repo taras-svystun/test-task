@@ -52,6 +52,8 @@ if uploaded_file is not None:
 
     qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=vectorstore.as_retriever())
 
+    qa.run("What is the capital of Canada?")
+
 # Store LLM generated responses
 if "messages" not in st.session_state.keys():
     st.session_state.messages = [{"role": "assistant", "content": "How can I help you?"}]
