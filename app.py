@@ -1,6 +1,8 @@
-import streamlit as st
-import replicate
 import os
+import replicate
+import streamlit as st
+from langchain.document_loaders import TextLoader
+from langchain.text_splitter import CharacterTextSplitter
 
 # App title
 st.set_page_config(page_title="🦙💬 Llama 2 Chatbot")
@@ -17,8 +19,26 @@ with st.sidebar:
             st.warning('Please enter your credentials!', icon='⚠️')
         else:
             st.success('Proceed to entering your prompt message!', icon='👉')
-    st.markdown('📖 Learn how to build this app in this [blog](https://blog.streamlit.io/how-to-build-a-llama-2-chatbot/)!')
+
 os.environ['REPLICATE_API_TOKEN'] = replicate_api
+
+st.title('Demo for <client> 😇️️️️️️')
+
+uploaded_file = st.file_uploader("Add a text file")
+if uploaded_file is not None:
+    
+
+    with open('_sample.txt', 'w') as file:
+        file.write("".join([line.decode() for line in uploaded_file]))
+
+    loader = TextLoader('_sample.txt')
+    documents = loader.load()
+
+    text_splitter=CharacterTextSplitter(separator='\n',
+                                        chunk_size=1000,
+                                        chunk_overlap=50)
+
+    text_chunks=text_splitter.split_documents(documents)
 
 # Store LLM generated responses
 if "messages" not in st.session_state.keys():
